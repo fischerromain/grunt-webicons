@@ -119,6 +119,7 @@ module.exports = function(grunt) {
     ];
 
     var createFavicon = function() { 
+
       if(options.favicon) {
         self.files.forEach(function(logo) {
           var faviconsLst = [];
@@ -129,22 +130,27 @@ module.exports = function(grunt) {
 
           var filename = path.join(logo.dst, 'favicon.ico');
           
-          var child = exec("convert " + faviconsLst.join(' ') + " " + filename, 
+          var child = exec("convert " + faviconsLst.join(' ') + " " + filename,
                 function (error, stdout, stderr) {
-                if (error) {
-                    grunt.fail.warn(stderr);
-                  } else {
-                    grunt.log.ok('Favicon for '+ logo.src + ' created');
-                  }
-                });
 
-          favicons.forEach(function(icon) {
-            var tmpPath = path.join(logo.dst, icon.name);
-            fs.unlink(tmpPath);
-          });
+                  if (error !== null) {
+                    grunt.fail.warn(error);
+                  }
+
+                  favicons.forEach(function(icon) {
+                    var tmpPath = path.join(logo.dst, icon.name);
+                    fs.unlink(tmpPath);
+                  });
+
+                    grunt.log.ok('Favicon for '+ logo.src + ' created');
+                  
+                    done();
+                  }
+                                  
+                );
+          
         });
       }
-      done();
     };
 
     var icons = [];
