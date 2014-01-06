@@ -1,6 +1,6 @@
 /*
 * webicons
-* https://github.com/excellenteasy.com/grunt-image-resize
+* https://github.com/fischerromain/grunt-webicons
 *
 * Copyright (c) 2014 Romain Fischer
 * Licensed under the MIT license.
